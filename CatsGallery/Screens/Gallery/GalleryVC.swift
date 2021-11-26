@@ -24,6 +24,19 @@ class GalleryVC: CTGDataLoadingVC {
         configureActions()
     }
     
+    override func viewDidLayoutSubviews() {
+        super.viewDidLayoutSubviews()
+        showEducationalBanner()
+    }
+    
+    private func showEducationalBanner() {
+        let launchedBefore = UserDefaults.standard.bool(forKey: "launchedBefore")
+        if !launchedBefore {
+            NotificationBannerManager.shared.presentNotificationBanner(title: "Double-tap to favorite", style: .info)
+            UserDefaults.standard.set(true, forKey: "launchedBefore")
+        }
+    }
+    
     
     //MARK: - Adding to favorites
     private func configureActions() {
